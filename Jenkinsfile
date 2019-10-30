@@ -1,14 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Okayyy') {
+        stage('Okay') {
             steps {
                 echo "Ok"
             }
         }
     }
-    
-    
+	
     post {
         success {
             emailext (
@@ -18,7 +17,7 @@ pipeline {
             )
         }
         failure {
-			emailext (
+	    emailext (
                 to: sripurampranav@gmail.com,
                 subject: "FAILURE",
                 body: "FAILURE!  '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
