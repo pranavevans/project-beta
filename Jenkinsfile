@@ -7,14 +7,22 @@ pipeline {
             }
         }
     }
+    
+    
     post {
-        always {
-            emailext ( 
-       subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", 
-       body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-         <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-     )
+        success {
+            emailext (
+                to: sripurampranav@gmail.com,
+                subject: "SUCCESS",
+                body: "SUCCESS!  '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+            )
+        }
+        failure {
+			emailext (
+                to: sripurampranav@gmail.com,
+                subject: "FAILURE",
+                body: "FAILURE!  '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+            )
         }
     }
 }
